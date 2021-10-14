@@ -1,0 +1,115 @@
+---
+title: "How to generate an `annotation_features.txt` file"
+author: "Miguel Cosenza"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+always_allow_html: true
+output: 
+  github_document:
+    toc: true
+    toc_depth: 3
+    number_sections: true
+---
+
+In this document I am including a small example on how to generate a `annotation_features.txt` file to be used as an input to do 'selected' FDR control after `limma` on a interestin features.
+
+__Note__: the outputs that can be generated in this example would not match the ones in the sample data. This document is intender to provide a guide on how to approach such a problem of creating the `annotation_features.txt`. You need to adapt it so the IDs in your `annotation_features.txt` file would match the ones in your `input_limma.txt` file.
+
+# Example based on annotated semi-specific peptides
+
+We already have a script that allows us to annotate our peptides regarding their specificity ([Mapping peptides to proteins in FASTA - Annotate](https://github.com/MiguelCos/mapping_peptides_to_proteins_from_fasta_file)) and we can use that to create our `annotation_features.txt` file.
+
+## First load the file of annotated peptides
+
+```{r}
+library(tidyverse)
+library(here)
+
+annot_peptides <- read_tsv(here("results/peptide_annotation_pif75_32searchv2.tsv"))
+```
+
+## Then select the interesting feature  
+
+Take a look at the names of the columns
+
+```{r}
+names(annot_peptides)
+```
+
+
+In this case, the columns related to the unique ID of the Peptide + Protein (index) and the type of specificity.
+
+__First we create our `index` variable so it matches the one in the `input_limma.txt` file.__
+
+```{r}
+annot_peptides_2 <- mutate(annot_peptides, # annotated peptides table as input
+                           index = paste(protein_id, Peptide, "_")) # new variable index is created by concatenating protein ID and peptide.
+```
+
+__Then we select the interesting columns__
+
+In this case: index and semi_type (containing the specificity information per peptide/feature)  
+
+```{r}
+annotation_features <- dplyr::select(annot_peptides_2,
+                                     ID = index, # changed index to ID column name
+                                     feature_category = semi_type)  # changed semi_type to feature_category column name
+```
+
+We can now save the `annotation_features.txt` file
+
+```{r}
+write_delim(annotation_features,
+            file = here("sample/data/annotation_features_semi_try.txt"), 
+            delim = "\t")
+```
+
+# Example based on protein names from headers
+
+In the case of metaproteomics studies, we might be interested in labelling proteins as 'human' or 'non-human/bacteria'.
+
+If we have the complete Uniprot identifier of the proteins, we can do that annotation easily.
+
+We load a sample dataset containing protein headers/IDs in the first column
+
+```{r}
+proteins_w_headers <- read_tsv("sample/data/sample_file_ids_header.tsv")  
+```
+
+If we check the first 6 rows, we see that the first column contain the protein headers names from the fasta file. We can use that to know if it comes from bacteria or human.
+
+```{r}
+head(proteins_w_headers)
+```
+
+Now we annotate the proteins as bacterial or human
+
+```{r}
+proteins_w_annotation <- mutate(proteins_w_headers, # input object
+                                feature_category = if_else(str_detect(header_id,"_HUMAN"), 
+                                                           true = "human",
+                                                           false = "bacteria")) # feature category is the name that this column should have in the `annotation_features.txt`
+```
+
+If we look at the last two columns, we see that, for each protein, we have a feature annotation.
+
+```{r}
+proteins_w_annotation[24:33,c(5:8)]
+```
+
+We can now select the two interesting columns (ID and feature_category) and save them in a file.
+
+```{r}
+annotation_features2 <- dplyr::select(proteins_w_annotation,
+                                     ID = header_id, # changed index to ID column name
+                                     feature_category)  # changed semi_type to feature_category column name
+```
+
+```{r}
+write_delim(annotation_features2,
+            file = here("sample/data/annotation_features_metaprot.txt"), 
+            delim = "\t")
+```
+
+
+
+
