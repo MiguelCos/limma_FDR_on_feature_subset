@@ -20,7 +20,7 @@ interesting_features <- "semi_Nterm"
 
 packages <- c("dplyr", "here", "tidyr", "ggplot2", "rmarkdown", "knitr", "reshape", "tibble")
 
-biopackgs <- c("limma", "clusterProfiler", org_db)
+biopackgs <- c("limma")
 
 if (length(setdiff(packages, rownames(installed.packages()))) > 0) {
                     install.packages(setdiff(packages, rownames(installed.packages())))  
@@ -44,8 +44,6 @@ library(knitr)
 library(kableExtra)
 library(reshape)
 library(plotly)
-library(clusterProfiler)
-library(org_db, character.only = TRUE)
 
 ## Load data ----
 expr_dat <- read.delim("data/input_limma.txt") %>%
