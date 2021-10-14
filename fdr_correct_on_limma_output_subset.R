@@ -161,7 +161,10 @@ volcanoes <- ggplot(data = tovolc,
 
 print(volcanoes)
 
+rep_out <- paste0("Output/simple_report_output_paired_DE_analysis_limma_",exper_code,
+                  ".txt")
+
 rmarkdown::render("renderReport.R", 
-                  output_file = 
+                  output_file = rep_out,
                   output_dir = "Output")
 
