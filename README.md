@@ -39,7 +39,7 @@ Refer to the `data/` folder in this repo for examples.
   * First column: `ID`. Should contain __exactly__ the same protein/features IDs that you have in the `ID` column of the `input_limma.txt` file.
   * Second column: `feature_category`. Should contain a characteristic which is interesting for each feature that you want to evaluate.
     * For example: you have a list of peptides that you have already characterized as 'semi-specific' or not (for example with [this script](https://github.com/MiguelCos/mapping_peptides_to_proteins_from_fasta_file)). Then you can select to keep only the column of your feature IDs (i.e. peptide sequences) and the interesting feature type (i.e. tryptic, semi_Nterm, semi_Cterm).
-    * In this repo I am also including an example script on how to generate this kind of tabular annotation if you have, for example: bacterial vs human proteins.
+    * In this repo I am also including an example script on how to generate this kind of tabular annotation if you have, for example: bacterial vs human proteins. For this, check the link in the section "How to create `annotation_features.txt`" below.
 
 ### Modifying the script:  
 
@@ -51,7 +51,15 @@ Provided that the user has placed the required input files in the `data/` folder
 4. Define the interesting feature type (lines 13 -> 17): in this example, by default, this is defined as "semi_Nterm" because that is the interesting feature of the peptides for which we want to apply the 'selected' FDR correction. Notice that the interesting feature should match to one of the ones that you have listed in the `annotation_features.txt` file. 
 5. Define which/how the two groups should be compared (line 72): you should modify the `makeContrasts` arguments to match your experimental groups as defined in the `annotation.txt`. Note: The group at the left of the `-` sign represents the numerator of the comparison (everything 'upregulated' would be increased in the group at the left of `-`.
 6. Then you can execute the code line by line or just click `Source` in the top right corner of the script in R Studio.
-7. You will get an `Output/` folder containing the tabular results of the `limma` comparison an a short HTML report as described in the first section of this documentation.  
+7. You will get an `Output/` folder containing the tabular results of the `limma` comparison an a short HTML report as described in the first section of this documentation. 
+
+## How to create `annotation_features.txt`
+
+Please refer to the example on how to create an `annotation_features.txt` file in [this link](https://github.com/MiguelCos/limma_FDR_on_feature_subset/blob/main/Rmds/how_to_generate_annotation_features.md).
+
+The first example refers to working from an annotated set of peptides from [this script](https://github.com/MiguelCos/mapping_peptides_to_proteins_from_fasta_file).
+
+The second example is more generic when you can use the protein name or header to identify a protein as human or not (i.e. for example, in metaproteomics studies).
 
 ## Two other approaches for differential weighting for multiple testing were tested
 
