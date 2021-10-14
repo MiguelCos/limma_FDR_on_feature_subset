@@ -72,7 +72,7 @@ If we have the complete Uniprot identifier of the proteins, we can do that annot
 We load a sample dataset containing protein headers/IDs in the first column
 
 ```{r}
-proteins_w_headers <- read_tsv("sample/data/sample_file_ids_header.tsv")  
+proteins_w_headers <- read_tsv(here("sample/data/sample_file_ids_header.tsv"))
 ```
 
 If we check the first 6 rows, we see that the first column contain the protein headers names from the fasta file. We can use that to know if it comes from bacteria or human.

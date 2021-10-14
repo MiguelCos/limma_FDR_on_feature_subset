@@ -1,3 +1,8 @@
+---
+output:
+  word_document: default
+  html_document: default
+---
 # FDR correction on a subset of features / proteins after `limma`
 
 This repo constains a main script and a series of sample scripts that would help you execute a `limma`-based differential abundance analysis and perform multiple testing correction only on a subset of interesting features (i.e. semi-tryptic peptides or bacterial proteins from metaproteomics studies, etc). 
