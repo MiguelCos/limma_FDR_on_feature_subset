@@ -126,8 +126,11 @@ output_limma3 <- bind_rows(tab_limma_subsetin,
                     
 ## Generate output ----
 
+tab_out <- paste0("Output/tab_output_paired_DE_analysis_limma_",exper_code,
+                  ".txt")
+
 write.table(output_limma3,
-            file = "Output/tab_output_paired_DE_analysis_limma.txt",
+            file = tab_out,
             row.names = FALSE, col.names = TRUE)
 
 sig_hits <- dplyr::filter(output_limma3, 
@@ -158,5 +161,7 @@ volcanoes <- ggplot(data = tovolc,
 
 print(volcanoes)
 
-rmarkdown::render("renderReport.R")
+rmarkdown::render("renderReport.R", 
+                  output_file = 
+                  output_dir = "Output")
 
