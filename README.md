@@ -13,7 +13,7 @@ The main script is set up to run a `limma`-based differential abundance analysis
 
 1. A tabular output with FCs, non-adjusted (moderated) p-values,  and adjusted p-values.
 2. The tabular output will contain a column `fdr_correction` that states if the multiple-testing correction was performed on the subset ('feature-specific') or if it is showing the globally-calculated FDR.
-3. A short HTML report with an interactive volcano plot and the compared groups.
+3. A short HTML report with an interactive volcano plot of the global comparison and the comparison based on the interesting/selected features.
 
 ## How to use it?
 
