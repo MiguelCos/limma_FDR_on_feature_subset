@@ -124,6 +124,10 @@ output_limma3 <- bind_rows(tab_limma_subsetin,
                     
 ## Generate output ----
 
+if(!dir.exists("Output")){
+                    dir.create("Output")
+}
+
 tab_out <- paste0("Output/tab_output_paired_DE_analysis_limma_",exper_code,
                   ".txt")
 
