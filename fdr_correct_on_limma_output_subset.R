@@ -136,10 +136,6 @@ sig_hits <- dplyr::filter(output_limma3,
 
 n_significant <- length(sig_hits)
 
-top_n_hits <- slice_min(output_limma3, 
-                        order_by = P.Value, 
-                        n = n_top_hits)
-
 ## Prep volcano plots for contrasts ----
 
 
@@ -160,7 +156,7 @@ volcanoes <- ggplot(data = tovolc,
 print(volcanoes)
 
 rep_out <- paste0("Output/simple_report_output_paired_DE_analysis_limma_",exper_code,
-                  ".txt")
+                  ".html")
 
 rmarkdown::render("renderReport.R", 
                   output_file = rep_out,
