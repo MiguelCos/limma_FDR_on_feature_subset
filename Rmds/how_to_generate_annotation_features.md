@@ -1,13 +1,15 @@
 How to generate an `annotation_features.txt` file
 ================
 Miguel Cosenza
-14 October, 2021
+20 October, 2021
 
 -   [1 Example based on annotated semi-specific
     peptides](#example-based-on-annotated-semi-specific-peptides)
-    -   [1.1 First load the file of annotated
-        peptides](#first-load-the-file-of-annotated-peptides)
-    -   [1.2 Then select the interesting
+    -   [1.1 Load required packages for this
+        example](#load-required-packages-for-this-example)
+    -   [1.2 Load the file of annotated
+        peptides](#load-the-file-of-annotated-peptides)
+    -   [1.3 Then select the interesting
         feature](#then-select-the-interesting-feature)
 -   [2 Example based on protein names from
     headers](#example-based-on-protein-names-from-headers)
@@ -30,32 +32,14 @@ regarding their specificity ([Mapping peptides to proteins in FASTA -
 Annotate](https://github.com/MiguelCos/mapping_peptides_to_proteins_from_fasta_file))
 and we can use that to create our `annotation_features.txt` file.
 
-## 1.1 First load the file of annotated peptides
+## 1.1 Load required packages for this example
 
 ``` r
 library(tidyverse)
-```
-
-    ## -- Attaching packages --------------------------------------- tidyverse 1.3.1 --
-
-    ## v ggplot2 3.3.5     v purrr   0.3.4
-    ## v tibble  3.1.2     v dplyr   1.0.7
-    ## v tidyr   1.1.3     v stringr 1.4.0
-    ## v readr   2.0.1     v forcats 0.5.1
-
-    ## Warning: package 'readr' was built under R version 4.1.1
-
-    ## Warning: package 'dplyr' was built under R version 4.1.1
-
-    ## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
-    ## x dplyr::filter() masks stats::filter()
-    ## x dplyr::lag()    masks stats::lag()
-
-``` r
 library(here)
 ```
 
-    ## here() starts at C:/Users/migue/OneDrive/Documentos/R_Projects/7_scripts_workflows/limma_FDR_on_feature_subset
+## 1.2 Load the file of annotated peptides
 
 ``` r
 annot_peptides <- read_tsv(here("results/peptide_annotation_pif75_32searchv2.tsv"))
@@ -72,7 +56,7 @@ annot_peptides <- read_tsv(here("results/peptide_annotation_pif75_32searchv2.tsv
     ## i Use `spec()` to retrieve the full column specification for this data.
     ## i Specify the column types or set `show_col_types = FALSE` to quiet this message.
 
-## 1.2 Then select the interesting feature
+## 1.3 Then select the interesting feature
 
 Take a look at the names of the columns
 
@@ -128,7 +112,7 @@ We load a sample dataset containing protein headers/IDs in the first
 column
 
 ``` r
-proteins_w_headers <- read_tsv("sample/data/sample_file_ids_header.tsv")  
+proteins_w_headers <- read_tsv(here("sample/data/sample_file_ids_header.tsv"))
 ```
 
     ## Rows: 3029 Columns: 7

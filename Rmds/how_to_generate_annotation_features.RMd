@@ -18,12 +18,16 @@ __Note__: the outputs that can be generated in this example would not match the 
 
 We already have a script that allows us to annotate our peptides regarding their specificity ([Mapping peptides to proteins in FASTA - Annotate](https://github.com/MiguelCos/mapping_peptides_to_proteins_from_fasta_file)) and we can use that to create our `annotation_features.txt` file.
 
-## First load the file of annotated peptides
+## Load required packages for this example  
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 library(tidyverse)
 library(here)
+```
 
+## Load the file of annotated peptides
+
+```{r}
 annot_peptides <- read_tsv(here("results/peptide_annotation_pif75_32searchv2.tsv"))
 ```
 
