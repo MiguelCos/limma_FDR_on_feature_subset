@@ -49,7 +49,7 @@ Provided that the user has placed the required input files in the `data/` folder
 2. Give the analysis a 'code name' (lines 5 -> 7).
 3. Define if doing a robust or least-squares regression with `limma` (lines 9 -> 11).
 4. Define the interesting feature type (lines 13 -> 17): in this example, by default, this is defined as "semi_Nterm" because that is the interesting feature of the peptides for which we want to apply the 'selected' FDR correction. Notice that the interesting feature should match to one of the ones that you have listed in the `annotation_features.txt` file. 
-5. Define which/how the two groups should be compared (line 72): you should modify the `makeContrasts` arguments to match your experimental groups as defined in the `annotation.txt`. Note: The group at the left of the `-` sign represents the numerator of the comparison (everything 'upregulated' would be increased in the group at the left of `-`.
+5. Define which/how the two groups should be compared (line 70): you should modify the `makeContrasts` arguments to match your experimental groups as defined in the `annotation.txt`. Note: The group at the left of the `-` sign represents the numerator of the comparison (everything 'upregulated' would be increased in the group at the left of `-`.
 6. Then you can execute the code line by line or just click `Source` in the top right corner of the script in R Studio.
 7. You will get an `Output/` folder containing the tabular results of the `limma` comparison an a short HTML report as described in the first section of this documentation. 
 
