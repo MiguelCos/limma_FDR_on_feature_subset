@@ -148,6 +148,7 @@ n_significant_sel_features <- length(sig_hits_sel)
 
 ## Prep volcano plots for contrasts ----
 
+numerator <- unlist(str_split(colnames(contrast.matrix), pattern = " - "))[1]
 
 tovolc_all <- output_limma3 %>% 
                     mutate(Differentially_expressed = case_when(adj.P.Val <= 0.05 ~ TRUE,
@@ -164,7 +165,9 @@ volcanoes <- ggplot(data = tovolc_all,
                                   label = ID)) + 
                     geom_point(alpha = 0.5) + 
                     geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "red") +
-                    ggtitle("Volcano plot of all limma-tested features") + 
+                    ggtitle("Volcano plot of all limma-tested features",
+                            subtitle = paste("Contrast:",colnames(contrast.matrix),
+                                             "\nFeatures with log(FC) > 0 are increased in", numerator)) + 
                     theme(legend.position = "none")
 
 volcano_features <- ggplot(data = tovolc_featu, 
@@ -174,7 +177,9 @@ volcano_features <- ggplot(data = tovolc_featu,
                                   label = ID)) + 
                     geom_point(alpha = 0.5) + 
                     geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "red") +
-                    ggtitle("Volcano plot of selected/interesting limma-tested features") + 
+                    ggtitle("Volcano plot of selected/interesting limma-tested features",
+                            subtitle = paste("Contrast:", colnames(contrast.matrix),
+                                             "\nFeatures with log(FC) > 0 are increased in", numerator)) + 
                     theme(legend.position = "none")
 
 

@@ -18,7 +18,7 @@ kable(group_by(annot_dat, Group = Group) %>% summarise(N = n()))%>%
 #'
 #'## Total number of features that are differentially abundant: `r n_significant_total`
 #'
-#'## Number of interesting/selected features that are differentially expressed: `r n_significant_sel_features`
+#'## Number of interesting/selected features that are differentially abundant: `r n_significant_sel_features`
 #'
 #'
 #+ fig.width=11.7, fig.height= 7.1, echo = FALSE, message = FALSE, warning = FALSE
