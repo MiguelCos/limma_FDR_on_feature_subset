@@ -165,8 +165,7 @@ volcanoes <- ggplot(data = tovolc_all,
                                   label = ID)) + 
                     geom_point(alpha = 0.5) + 
                     geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "red") +
-                    ggtitle("Volcano plot of all limma-tested features",
-                            subtitle = paste("Contrast:",colnames(contrast.matrix),
+                    ggtitle(paste("Contrast:",colnames(contrast.matrix),
                                              "\nFeatures with log(FC) > 0 are increased in", numerator)) + 
                     theme(legend.position = "none")
 
@@ -177,8 +176,7 @@ volcano_features <- ggplot(data = tovolc_featu,
                                   label = ID)) + 
                     geom_point(alpha = 0.5) + 
                     geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "red") +
-                    ggtitle("Volcano plot of selected/interesting limma-tested features",
-                            subtitle = paste("Contrast:", colnames(contrast.matrix),
+                    ggtitle(paste("Contrast:", colnames(contrast.matrix),
                                              "\nFeatures with log(FC) > 0 are increased in", numerator)) + 
                     theme(legend.position = "none")
 
